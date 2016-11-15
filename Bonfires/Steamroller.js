@@ -17,9 +17,17 @@ function steamrollArray(arr) {
     }, []);
   Step 3: check for nested arrays, and call the function recursively on the element if it is a nested array
   */
-  return arr.reduce(function(prev, curr){
+  return arr.reduce(function(prev, curr, index, arr){
+    console.log("--");
+    console.log("Previous value:");
+    console.log(prev);
+    console.log("Current value:");
+    console.log(curr);
+    console.log("Index:");
+    console.log(index);
+    console.log("Running array:");
+    console.log(arr);
     return prev.concat(Array.isArray(curr) ? steamrollArray(curr) : curr );
   }, []);
 }
-
-steamrollArray([1, [2], [3, [[4]]]]);
+console.log(steamrollArray([1, [2], [3, [[4]]]]));
