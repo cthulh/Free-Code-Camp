@@ -20,7 +20,7 @@ function smallestCommons(arr) {
   var step = range[0] * range[1];
   console.log("Step: " + step);
   var j = step;
-  
+
   while (true) {
     var counter = 0;
     for ( k = 2 ; k < range.length ; k += 1){
