@@ -1,24 +1,37 @@
 //https://www.freecodecamp.com/challenges/exact-change
 
 function checkCashRegister(price, cash, cid) {
+  var VALS = [["PENNY", 0.01],
+    ["NICKEL", 0.05],
+    ["DIME", 0.10],
+    ["QUARTER", 0.25],
+    ["ONE", 1.00],
+    ["FIVE", 5.00],
+    ["TEN", 10.00],
+    ["TWENTY", 20.00],
+    ["ONE HUNDRED", 100.00]];
+
   var due_change = cash - price;
 
-  function cashierBalance(cid){
-    var balance = 0;
-    return balance;
+  function cashierBalance(){
+    return cid.reduce(function(prev,curr){return prev[1] + curr[1]},0);
   }
 
-  function calculateChange(){
+  function calculateChange(sum){
     var change = [];
-
-
+    var running_change = sum;
+    
+    // iterate over cid from the end to beginning
+    // if running change is bigger than value of a unit in VALS
+    // deduct maximum multiplication smaller then running change and add that value with name of the unit to change array
+    // until running change === 0
 
     return change;
   }
 
-  if (cashierBalance(cid) > due_change) {
-    return calculateChange();
-  } else if (cashierBalance(cid) === due_change) {
+  if (cashierBalance() > due_change) {
+    return calculateChange(due_change);
+  } else if (cashierBalance() === due_change) {
     return "Closed";
   } else {
     return "Insufficient Funds";
