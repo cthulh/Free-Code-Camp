@@ -24,6 +24,13 @@ function makeFriendlyDates(arr) {
     var result = parseInt((date2 - date1) / (1000 * 60 * 60 * 24));
     return (result > 364)? true : false;
   }
+  function isInCurrentYear(dates){
+    var result = true;
+    for (z = 0; z < arguments.length; z += 1){
+      if (getYear(arguments[z]) !== "2016") result = false;
+    }
+    return result;
+  }
 
   console.log(start_date);
   var start_year = getYear(start_date);
@@ -42,14 +49,19 @@ function makeFriendlyDates(arr) {
   console.log("Current month: " + current_date.getMonth());
   console.log("Current day: " + current_date.getDate());
 
-
-  if (moreThanAYear(start_date,end_date)){
-    // if more than a year between dates
-    friendlyDates.push(start_month + " " + start_day + ", " + start_year);
-    friendlyDates.push(end_month + " " + end_day + ", " + end_year);
+  friendlyDates.push(start_month + " " + start_day + (isInCurrentYear(start_year) && !moreThanAYear(start_date,end_date)? "" : ", " + start_year));
+  if (start_date !== end_date) {
+    friendlyDates.push(
+      (isInCurrentYear(start_year,end_year) && start_month === end_month? "" : end_month+ " ")  +
+      end_day + (isInCurrentYear(start_year,end_year) || !moreThanAYear(start_date,end_date)? "" : ", " + end_year));
   }
+
   console.log(friendlyDates);
   return friendlyDates;
 }
 
 makeFriendlyDates(['2016-07-01', '2016-07-04']);
+makeFriendlyDates(["2016-12-01", "2017-02-03"]);
+makeFriendlyDates(["2016-12-01", "2018-02-03"]);
+makeFriendlyDates(["2022-09-05", "2023-09-04"]);
+makeFriendlyDates(["2018-01-13", "2018-01-13"]);
